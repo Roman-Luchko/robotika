@@ -1,0 +1,185 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/SandyGround.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/dji/mavic/protos/Mavic2Pro.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+  info [
+    "This demonstration shows a DJI Mavic 2 PRO flying over a rural area."
+    "After the drone has taken off, you can control it with the keyboard of your computer."
+  ]
+  title "DJI Mavic 2 PRO demo"
+  basicTimeStep 8
+  defaultDamping Damping {
+    linear 0.5
+    angular 0.5
+  }
+}
+Viewpoint {
+  orientation 0.3318482592210822 -0.47721055199571777 -0.8137240453101283 4.917859569598329
+  position -0.7864385976194558 -4.7297483531428055 2.4601258638789085
+  near 0.2
+  follow "Mavic 2 PRO"
+  followSmoothness 0.2
+}
+TexturedBackground {
+  luminosity 3
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 400 400
+  tileSize 6 6
+  appearance SandyGround {
+  }
+}
+Mavic2Pro {
+  hidden position_0_0 -3.013701589952035e-10
+  hidden position_6_0 6.635177853571409e-09
+  hidden position_7_0 -2.5201236653060732e-09
+  translation -0.005308318143827304 5.055043161321469e-07 0.06570872787430461
+  rotation 1.6162771934739954e-05 -0.9999999998627781 3.6343921819417823e-06 0.06974198959227981
+  controller "example_python"
+  bodySlot [
+    Receiver {
+    }
+  ]
+  cameraSlot [
+    Camera {
+      width 400
+      height 240
+      near 0.2
+    }
+  ]
+}
+E-puck {
+  hidden position_0_0 -1.5204392867380827e-08
+  hidden position_0_1 1.5204390106954222e-08
+  hidden rotation_1 0 1 0 1.5792353341585303
+  hidden rotation_2 0 -0.9999999999999999 0 0.4416187812912658
+  translation -3.85744000029031 0.49445298884882094 -1.5990498946790582e-05
+  rotation 5.61837897264928e-10 6.965482798058803e-10 1 1.630578199756387
+  name "sensor1"
+  controller "e_puck_sd"
+  groundSensorsSlot [
+    GPS {
+    }
+    Emitter {
+      name "emitter(1)"
+      range 100
+    }
+    Receiver {
+      name "receiver(1)"
+    }
+  ]
+}
+E-puck {
+  hidden position_0_0 -1.0136803303888363e-09
+  hidden position_0_1 1.0136808033840025e-09
+  hidden rotation_1 0 -1 0 1.0858209242694687
+  hidden rotation_2 0 0.9999999999999999 0 4.552356039499831
+  translation 3.624757074480563 6.331292294987217 0.04748430399983307
+  rotation 0.8702282770388076 0.4926487042926815 -9.001682055959622e-07 -3.141589473425835
+  name "sensor2"
+  controller "e_puck_sd"
+  groundSensorsSlot [
+    GPS {
+    }
+    Emitter {
+      name "emitter(2)"
+      range 100
+    }
+    Receiver {
+      name "receiver(2)"
+    }
+  ]
+}
+E-puck {
+  hidden position_0_0 1.1333873690461293e-10
+  hidden position_0_1 -1.520445759562827e-08
+  hidden rotation_1 0 -1 0 4.645644638505081
+  hidden rotation_2 0 0.9999999999999999 0 2.5227699647273805
+  translation 1.478479999842085 -3.6000100000561632 -1.5990498947496615e-05
+  rotation -9.103578502954751e-10 8.142950320117391e-10 -1 1.1192898357420007
+  name "sensor3"
+  controller "e_puck_sd"
+  groundSensorsSlot [
+    GPS {
+    }
+    Emitter {
+      name "emitter(3)"
+      range 100
+    }
+    Receiver {
+      name "receiver(3)"
+    }
+  ]
+}
+E-puck {
+  hidden position_0_0 6.148470104750718e-13
+  hidden position_0_1 5.277395611118375e-15
+  hidden rotation_2 0 1 0 3.9910672708950448
+  translation -5.076077704794159 4.649763168358262 0.036953640320419534
+  rotation 0.6581719982089108 -0.5322315398390308 -0.5324839986086564 1.9767711338692455
+  name "sensor4"
+  controller "e_puck_sd"
+  groundSensorsSlot [
+    GPS {
+    }
+    Emitter {
+      name "emitter(4)"
+      range 100
+    }
+    Receiver {
+      name "receiver(4)"
+    }
+  ]
+}
+E-puck {
+  hidden position_0_0 -1.1333764473244605e-10
+  hidden position_0_1 -1.5204488088867552e-08
+  hidden rotation_1 0 1 0 6.131406381557037
+  hidden rotation_2 0 1 0 2.108758370899996
+  translation 0.549756371183624 -2.233685934641584 -1.5990498948134993e-05
+  rotation 5.208353443127436e-10 4.1323498149204847e-10 1 1.1009345752572433
+  name "sensor5"
+  controller "e_puck_sd"
+  groundSensorsSlot [
+    GPS {
+    }
+    Emitter {
+      name "emitter(5)"
+      range 100
+    }
+    Receiver {
+      name "receiver(5)"
+    }
+  ]
+}
+E-puck {
+  hidden position_0_0 101.50784015941049
+  hidden position_0_1 111.48562803648271
+  hidden linearVelocity_0 0.04938109448308966 -0.025354015309143243 -1.0021027639967489e-06
+  hidden angularVelocity_0 0.0032349014662229887 0.006285348068128088 0.09043948069117695
+  hidden rotation_1 0 -0.9999999999999999 0 4.365104033479436
+  hidden linearVelocity_1 0.04731999685533051 -0.024297443082597646 -7.584836268471013e-07
+  hidden angularVelocity_1 1.2098048809802961 2.3561323749581167 0.09054376032145951
+  hidden rotation_2 0 0.9999999999999999 0 4.383935351633969
+  hidden linearVelocity_2 0.05150356528573308 -0.02644560343975873 -9.733134450641014e-07
+  hidden angularVelocity_2 1.3273428897055166 2.5850377468858587 0.09056455960726933
+  translation 1.1564776266027312 5.05574159101646 -1.5853798435090313e-05
+  rotation 0.001654810646186492 0.006856607736569065 0.9999751239566274 -0.4740126251356953
+  name "data center"
+  groundSensorsSlot [
+    Emitter {
+      name "emitter_data_center"
+    }
+    Receiver {
+      name "receiver_data_center"
+    }
+  ]
+}
