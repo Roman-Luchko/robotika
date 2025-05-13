@@ -1,0 +1,350 @@
+04:55:48 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+05:21:15 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Creating executable: ../out/clang-release/src/MySensorProject.exe
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+05:21:24 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+05:22:27 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Creating executable: ../out/clang-release/src/MySensorProject.exe
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+05:22:31 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+05:24:33 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Creating executable: ../out/clang-release/src/MySensorProject.exe
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+05:24:39 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+05:25:52 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Sensor.cc:26:27: error: no matching constructor for initialization of 'SyncMessage'
+        scheduleAt(0, new SyncMessage("syncSend"));
+                          ^           ~~~~~~~~~~
+Sensor.cc:7:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'const char[9]' to 'const SyncMessage' for 1st argument
+class SyncMessage : public cMessage {};
+      ^
+Sensor.cc:7:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'const char[9]' to 'SyncMessage' for 1st argument
+class SyncMessage : public cMessage {};
+      ^
+Sensor.cc:7:7: note: candidate constructor (the implicit default constructor) not viable: requires 0 arguments, but 1 was provided
+Sensor.cc:50:41: error: no matching constructor for initialization of 'SyncMessage'
+                cMessage* syncMsg = new SyncMessage("syncSend");
+                                        ^           ~~~~~~~~~~
+Sensor.cc:7:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'const char[9]' to 'const SyncMessage' for 1st argument
+class SyncMessage : public cMessage {};
+      ^
+Sensor.cc:7:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'const char[9]' to 'SyncMessage' for 1st argument
+class SyncMessage : public cMessage {};
+      ^
+Sensor.cc:7:7: note: candidate constructor (the implicit default constructor) not viable: requires 0 arguments, but 1 was provided
+2 errors generated.
+make[1]: *** [Makefile:108: ../out/clang-release/src/Sensor.o] Error 1
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make: *** [Makefile:2: all] Error 2
+"make MODE=release all" terminated with exit code 2. Build might be incomplete.
+05:26:22 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Creating executable: ../out/clang-release/src/MySensorProject.exe
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+05:26:31 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+05:27:47 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Creating executable: ../out/clang-release/src/MySensorProject.exe
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+05:27:52 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+07:29:44 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Creating executable: ../out/clang-release/src/MySensorProject.exe
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+07:29:48 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+07:31:20 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Creating executable: ../out/clang-release/src/MySensorProject.exe
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+07:31:30 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+07:33:48 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Sensor.cc:83:9: error: definition of implicitly declared destructor
+Sensor::~Sensor() {
+        ^
+1 error generated.
+make[1]: *** [Makefile:108: ../out/clang-release/src/Sensor.o] Error 1
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make: *** [Makefile:2: all] Error 2
+"make MODE=release all" terminated with exit code 2. Build might be incomplete.
+07:34:04 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Sensor.cc:83:9: error: definition of implicitly declared destructor
+Sensor::~Sensor() {
+        ^
+1 error generated.
+make[1]: *** [Makefile:108: ../out/clang-release/src/Sensor.o] Error 1
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make: *** [Makefile:2: all] Error 2
+"make MODE=release all" terminated with exit code 2. Build might be incomplete.
+07:34:50 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Sensor.cc:82:14: error: out-of-line definition of 'finish' does not match any declaration in 'Sensor'
+void Sensor::finish()
+             ^~~~~~
+1 error generated.
+make[1]: *** [Makefile:108: ../out/clang-release/src/Sensor.o] Error 1
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make: *** [Makefile:2: all] Error 2
+"make MODE=release all" terminated with exit code 2. Build might be incomplete.
+07:35:25 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+In file included from Sensor.cc:1:
+./Sensor.h:7:23: error: unknown class name 'cSimpleModule'; did you mean 'omnetpp::cSimpleModule'?
+class Sensor : public cSimpleModule
+                      ^~~~~~~~~~~~~
+                      omnetpp::cSimpleModule
+D:/omnetpp-6.1/include/omnetpp/csimplemodule.h:202:15: note: 'omnetpp::cSimpleModule' declared here
+class SIM_API cSimpleModule : public cModule //implies noncopyable
+              ^
+In file included from Sensor.cc:1:
+./Sensor.h:15:32: error: unknown type name 'cMessage'; did you mean 'omnetpp::cMessage'?
+    virtual void handleMessage(cMessage *msg) override;
+                               ^~~~~~~~
+                               omnetpp::cMessage
+D:/omnetpp-6.1/include/omnetpp/envirext.h:33:7: note: 'omnetpp::cMessage' declared here
+class cMessage;
+      ^
+Sensor.cc:36:23: error: unknown type name 'cMessage'; did you mean 'omnetpp::cMessage'?
+    scheduleAt(0, new cMessage("sendData"));
+                      ^~~~~~~~
+                      omnetpp::cMessage
+D:/omnetpp-6.1/include/omnetpp/envirext.h:33:7: note: 'omnetpp::cMessage' declared here
+class cMessage;
+      ^
+Sensor.cc:39:28: error: unknown type name 'cMessage'
+void Sensor::handleMessage(cMessage *msg)
+                           ^
+Sensor.cc:43:9: error: unknown type name 'simtime_t'; did you mean 'omnetpp::simtime_t'?
+        simtime_t sendTime = simTime();
+        ^~~~~~~~~
+        omnetpp::simtime_t
+D:/omnetpp-6.1/include/omnetpp/simtime_t.h:40:17: note: 'omnetpp::simtime_t' declared here
+typedef SimTime simtime_t;
+                ^
+Sensor.cc:43:30: error: use of undeclared identifier 'simTime'; did you mean 'omnetpp::simTime'?
+        simtime_t sendTime = simTime();
+                             ^~~~~~~
+                             omnetpp::simTime
+D:/omnetpp-6.1/include/omnetpp/csimulation.h:601:18: note: 'omnetpp::simTime' declared here
+inline simtime_t simTime() {return cSimulation::getActiveSimulation()->getSimTime();}
+                 ^
+Sensor.cc:49:9: error: unknown type name 'cMessage'; did you mean 'omnetpp::cMessage'?
+        cMessage* data = new cMessage("sensorData");
+        ^~~~~~~~
+        omnetpp::cMessage
+D:/omnetpp-6.1/include/omnetpp/envirext.h:33:7: note: 'omnetpp::cMessage' declared here
+class cMessage;
+      ^
+Sensor.cc:49:30: error: unknown type name 'cMessage'; did you mean 'omnetpp::cMessage'?
+        cMessage* data = new cMessage("sensorData");
+                             ^~~~~~~~
+                             omnetpp::cMessage
+D:/omnetpp-6.1/include/omnetpp/envirext.h:33:7: note: 'omnetpp::cMessage' declared here
+class cMessage;
+      ^
+Sensor.cc:55:9: error: unknown type name 'simtime_t'; did you mean 'omnetpp::simtime_t'?
+        simtime_t sendEventTime = simTime();
+        ^~~~~~~~~
+        omnetpp::simtime_t
+D:/omnetpp-6.1/include/omnetpp/simtime_t.h:40:17: note: 'omnetpp::simtime_t' declared here
+typedef SimTime simtime_t;
+                ^
+Sensor.cc:55:35: error: use of undeclared identifier 'simTime'; did you mean 'omnetpp::simTime'?
+        simtime_t sendEventTime = simTime();
+                                  ^~~~~~~
+                                  omnetpp::simTime
+D:/omnetpp-6.1/include/omnetpp/csimulation.h:601:18: note: 'omnetpp::simTime' declared here
+inline simtime_t simTime() {return cSimulation::getActiveSimulation()->getSimTime();}
+                 ^
+Sensor.cc:58:47: error: unknown type name 'cMessage'; did you mean 'omnetpp::cMessage'?
+        scheduleAt(sendEventTime + 0.001, new cMessage("waitForData"));
+                                              ^~~~~~~~
+                                              omnetpp::cMessage
+D:/omnetpp-6.1/include/omnetpp/envirext.h:33:7: note: 'omnetpp::cMessage' declared here
+class cMessage;
+      ^
+Sensor.cc:61:20: error: use of undeclared identifier 'simTime'; did you mean 'omnetpp::simTime'?
+        scheduleAt(simTime() + sendInterval, msg);
+                   ^~~~~~~
+                   omnetpp::simTime
+D:/omnetpp-6.1/include/omnetpp/csimulation.h:601:18: note: 'omnetpp::simTime' declared here
+inline simtime_t simTime() {return cSimulation::getActiveSimulation()->getSimTime();}
+                 ^
+Sensor.cc:65:9: error: unknown type name 'simtime_t'; did you mean 'omnetpp::simtime_t'?
+        simtime_t endTime = simTime();
+        ^~~~~~~~~
+        omnetpp::simtime_t
+D:/omnetpp-6.1/include/omnetpp/simtime_t.h:40:17: note: 'omnetpp::simtime_t' declared here
+typedef SimTime simtime_t;
+                ^
+Sensor.cc:65:29: error: use of undeclared identifier 'simTime'; did you mean 'omnetpp::simTime'?
+        simtime_t endTime = simTime();
+                            ^~~~~~~
+                            omnetpp::simTime
+D:/omnetpp-6.1/include/omnetpp/csimulation.h:601:18: note: 'omnetpp::simTime' declared here
+inline simtime_t simTime() {return cSimulation::getActiveSimulation()->getSimTime();}
+                 ^
+Sensor.cc:66:9: error: unknown type name 'simtime_t'; did you mean 'omnetpp::simtime_t'?
+        simtime_t transmissionTime = endTime - (simTime() - 0.001); // Вычисляем время передачи (нужно для точности)
+        ^~~~~~~~~
+        omnetpp::simtime_t
+D:/omnetpp-6.1/include/omnetpp/simtime_t.h:40:17: note: 'omnetpp::simtime_t' declared here
+typedef SimTime simtime_t;
+                ^
+Sensor.cc:66:49: error: use of undeclared identifier 'simTime'; did you mean 'omnetpp::simTime'?
+        simtime_t transmissionTime = endTime - (simTime() - 0.001); // Вычисляем время передачи (нужно для точности)
+                                                ^~~~~~~
+                                                omnetpp::simTime
+D:/omnetpp-6.1/include/omnetpp/csimulation.h:601:18: note: 'omnetpp::simTime' declared here
+inline simtime_t simTime() {return cSimulation::getActiveSimulation()->getSimTime();}
+                 ^
+16 errors generated.
+make[1]: *** [Makefile:108: ../out/clang-release/src/Sensor.o] Error 1
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make: *** [Makefile:2: all] Error 2
+"make MODE=release all" terminated with exit code 2. Build might be incomplete.
+07:36:02 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+In file included from Sensor.cc:1:
+./Sensor.h:6:23: error: unknown class name 'cSimpleModule'; did you mean 'omnetpp::cSimpleModule'?
+class Sensor : public cSimpleModule
+                      ^~~~~~~~~~~~~
+                      omnetpp::cSimpleModule
+D:/omnetpp-6.1/include/omnetpp/csimplemodule.h:202:15: note: 'omnetpp::cSimpleModule' declared here
+class SIM_API cSimpleModule : public cModule //implies noncopyable
+              ^
+In file included from Sensor.cc:1:
+./Sensor.h:14:32: error: unknown type name 'cMessage'; did you mean 'omnetpp::cMessage'?
+    virtual void handleMessage(cMessage *msg) override;
+                               ^~~~~~~~
+                               omnetpp::cMessage
+D:/omnetpp-6.1/include/omnetpp/envirext.h:33:7: note: 'omnetpp::cMessage' declared here
+class cMessage;
+      ^
+2 errors generated.
+make[1]: *** [Makefile:108: ../out/clang-release/src/Sensor.o] Error 1
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make: *** [Makefile:2: all] Error 2
+"make MODE=release all" terminated with exit code 2. Build might be incomplete.
+07:40:38 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Creating executable: ../out/clang-release/src/MySensorProject.exe
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+07:40:43 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+10:40:07 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+Sensor.cc
+Creating executable: ../out/clang-release/src/MySensorProject.exe
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+10:45:02 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+10:45:07 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+10:45:41 **** Incremental Build of configuration release for project MySensorProject ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorProject/src'

@@ -1,0 +1,88 @@
+#include "Sensor.h"
+#include "PositionLoader.h"
+#include <fstream>  // Для работы с файлами
+
+Define_Module(Sensor);
+
+// Глобальная переменная для записи в файл
+std::ofstream Sensor::outFile;
+
+void Sensor::initialize()
+{
+    // Получаем индекс сенсора
+    int index = getIndex();
+
+    // Загружаем позицию сенсора из файла
+    pos = PositionLoader::getInstance()->getSensorPosition(index);
+
+    // Параметр интервала для отправки данных
+    sendInterval = par("sendInterval");
+
+    // Логируем информацию о сенсоре
+    EV << "Sensor " << index << " initialized at position (" << pos.first << ", " << pos.second << ").\n";
+
+    // Открытие файла для записи
+    if (!outFile.is_open()) {
+        outFile.open("transmission_times.txt", std::ios::out | std::ios::app);  // Открываем файл для записи (или добавления)
+        if (outFile.is_open()) {
+            outFile << "Sensor Transmission Times\n";
+            outFile << "Sensor Index, Transmission Time (seconds)\n";  // Заголовок
+        } else {
+            EV << "Error: Unable to open the file for writing.\n";
+        }
+    }
+
+    // Запланировать отправку данных всех сенсоров на время 0
+    scheduleAt(0, new omnetpp::cMessage("sendData"));  // Используем omnetpp::cMessage
+}
+
+void Sensor::handleMessage(omnetpp::cMessage *msg)
+{
+    if (strcmp(msg->getName(), "sendData") == 0) {
+        // Получаем текущее время симуляции до отправки данных
+        omnetpp::simtime_t sendTime = omnetpp::simTime();
+
+        // Логируем отправку данных
+        EV << "Sensor " << getIndex() << " sending data from position (" << pos.first << ", " << pos.second << ").\n";
+
+        // Создаем сообщение данных
+        omnetpp::cMessage* data = new omnetpp::cMessage("sensorData");  // Используем omnetpp::cMessage
+
+        // Отправляем сообщение
+        send(data, "out");
+
+        // Сохраняем время, когда отправлено сообщение
+        omnetpp::simtime_t sendEventTime = omnetpp::simTime();
+
+        // Планируем, чтобы сенсор подождал некоторое время и затем записал время, которое прошло.
+        scheduleAt(sendEventTime + 0.001, new omnetpp::cMessage("waitForData"));  // Используем omnetpp::cMessage
+
+        // Планируем следующее отправление данных с интервалом
+        scheduleAt(omnetpp::simTime() + sendInterval, msg);
+    }
+    else if (strcmp(msg->getName(), "waitForData") == 0) {
+        // Получаем текущее время, когда прошло время ожидания для обработки
+        omnetpp::simtime_t endTime = omnetpp::simTime();
+        omnetpp::simtime_t transmissionTime = endTime - (omnetpp::simTime() - 0.001); // Вычисляем время передачи (нужно для точности)
+
+        // Логируем время передачи
+        EV << "Sensor " << getIndex() << " sent data. Time taken for transmission: " << transmissionTime << " seconds.\n";
+
+        // Записываем время передачи в файл
+        if (outFile.is_open()) {
+            outFile << getIndex() << ", " << transmissionTime << "\n";  // Записываем в файл
+        } else {
+            EV << "Error: File is not open for writing.\n";
+        }
+
+        delete msg;  // Очистить сообщение
+    }
+}
+
+void Sensor::finish()
+{
+    // Закрываем файл после завершения симуляции
+    if (outFile.is_open()) {
+        outFile.close();
+    }
+}

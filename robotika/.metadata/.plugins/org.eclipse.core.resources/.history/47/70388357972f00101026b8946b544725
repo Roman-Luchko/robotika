@@ -1,0 +1,9 @@
+package src;
+
+simple Sensor {
+    parameters:
+        int id;
+        @display("i=block/sensor");
+    gates:
+        output out;
+}

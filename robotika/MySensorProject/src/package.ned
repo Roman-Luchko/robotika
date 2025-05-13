@@ -1,0 +1,3 @@
+package mysensorproject;
+
+@license(LGPL);

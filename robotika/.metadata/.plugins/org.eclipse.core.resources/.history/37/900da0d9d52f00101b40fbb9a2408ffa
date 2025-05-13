@@ -1,0 +1,18 @@
+#ifndef SENSOR_H
+#define SENSOR_H
+
+#include <omnetpp.h>  // Это нужно для использования классов OMNeT++
+
+class Sensor : public omnetpp::cSimpleModule  // Используем omnetpp::cSimpleModule
+{
+  private:
+    std::pair<double, double> pos; // Позиция сенсора
+    double sendInterval; // Интервал для отправки данных
+    static std::ofstream outFile; // Статический объект для записи в файл
+  protected:
+    virtual void initialize() override;
+    virtual void handleMessage(omnetpp::cMessage *msg) override;  // Используем omnetpp::cMessage
+    virtual void finish() override; // Добавлено
+};
+
+#endif

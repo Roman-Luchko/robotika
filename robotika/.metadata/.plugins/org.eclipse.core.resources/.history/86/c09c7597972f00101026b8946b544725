@@ -1,0 +1,16 @@
+package src;
+
+import src.Sensor;
+import src.Drone;
+
+network SensorNetwork {
+    submodules:
+        sensor[5]: Sensor {
+            parameters:
+                @display("i=block/s");
+        }
+        drone: Drone {
+            parameters:
+                @display("i=block/uav");
+        }
+}

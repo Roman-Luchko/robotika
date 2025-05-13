@@ -1,0 +1,8 @@
+package src;
+
+simple Drone {
+    parameters:
+        @display("i=block/drone");
+    gates:
+        input in[5];
+}

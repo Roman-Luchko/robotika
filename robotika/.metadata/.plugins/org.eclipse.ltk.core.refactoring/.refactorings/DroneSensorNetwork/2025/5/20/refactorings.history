@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;omnetpp.ini&apos; to &apos;DroneSensorNetwork&apos;" description="Move &apos;omnetpp.ini&apos; to &apos;DroneSensorNetwork&apos;" destination="/DroneSensorNetwork" element1="src/omnetpp.ini" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1747075374452" updateReferences="true"/>
+</session>

@@ -1,0 +1,55 @@
+#include "Sensor.h"
+#include "PositionLoader.h"
+
+Define_Module(Sensor);
+
+// Глобальный обработчик для синхронизации всех сенсоров
+class SyncMessage : public cMessage {};
+
+void Sensor::initialize()
+{
+    // Получаем индекс сенсора
+    int index = getIndex();
+
+    // Загружаем позицию сенсора из файла
+    pos = PositionLoader::getInstance()->getSensorPosition(index);
+
+    // Параметр интервала для отправки данных
+    sendInterval = par("sendInterval");
+
+    // Логируем информацию о сенсоре
+    EV << "Sensor " << index << " initialized at position (" << pos.first << ", " << pos.second << ").\n";
+
+    // Запланировать глобальное событие для отправки данных одновременно
+    if (index == 0) {
+        // Только для первого сенсора планируем синхронизацию
+        scheduleAt(0, new SyncMessage("syncSend"));
+    }
+}
+
+void Sensor::handleMessage(cMessage *msg)
+{
+    // Если событие глобальной синхронизации (для всех сенсоров)
+    if (strcmp(msg->getName(), "syncSend") == 0) {
+        // Логируем отправку данных
+        EV << "Sensor " << getIndex() << " sending data from position (" << pos.first << ", " << pos.second << ").\n";
+
+        // Создаем сообщение данных
+        cMessage* data = new cMessage("sensorData");
+
+        // Отправляем сообщение
+        send(data, "out");
+
+        // Планируем следующее отправление данных с интервалом
+        scheduleAt(simTime() + sendInterval, msg);
+
+        // Для всех остальных сенсоров, если они еще не начали отправку
+        if (getIndex() == 0) {
+            // Делаем это только для одного сенсора, чтобы запланировать событие для всех
+            for (int i = 1; i < 5; i++) {
+                cMessage* syncMsg = new SyncMessage("syncSend");
+                send(syncMsg, "out");
+            }
+        }
+    }
+}

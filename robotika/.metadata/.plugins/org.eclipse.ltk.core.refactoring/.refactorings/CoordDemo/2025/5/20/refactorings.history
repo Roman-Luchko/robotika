@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;PositionTest/coordinates.tx&apos; to &apos;coordinates.txt&apos;" description="Rename resource &apos;coordinates.tx&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="coordinates.tx" name="coordinates.txt" stamp="1747036009184" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;CoordDemo/Network.ned&apos; to &apos;MyNetwork.ned&apos;" description="Rename resource &apos;Network.ned&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Network.ned" name="MyNetwork.ned" stamp="1747036871044" updateReferences="true"/>
+</session>

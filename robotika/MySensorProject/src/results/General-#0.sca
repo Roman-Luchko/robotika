@@ -1,0 +1,33 @@
+version 3
+run General-0-20250513-07:40:45-43080
+attr configname General
+attr datetime 20250513-07:40:45
+attr datetimef 20250513-074045
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network SensorDroneNetwork
+attr processid 43080
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network SensorDroneNetwork
+
+par SensorDroneNetwork.sensor[0] typename "\"mysensorproject.Sensor\""
+par SensorDroneNetwork.sensor[0] sendInterval 1
+par SensorDroneNetwork.sensor[1] typename "\"mysensorproject.Sensor\""
+par SensorDroneNetwork.sensor[1] sendInterval 1
+par SensorDroneNetwork.sensor[2] typename "\"mysensorproject.Sensor\""
+par SensorDroneNetwork.sensor[2] sendInterval 1
+par SensorDroneNetwork.sensor[3] typename "\"mysensorproject.Sensor\""
+par SensorDroneNetwork.sensor[3] sendInterval 1
+par SensorDroneNetwork.sensor[4] typename "\"mysensorproject.Sensor\""
+par SensorDroneNetwork.sensor[4] sendInterval 1
+par SensorDroneNetwork.drone typename "\"mysensorproject.Drone\""
+par SensorDroneNetwork typename "\"mysensorproject.SensorDroneNetwork\""
+

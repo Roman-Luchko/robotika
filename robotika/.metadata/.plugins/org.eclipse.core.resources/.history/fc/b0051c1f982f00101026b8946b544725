@@ -1,0 +1,16 @@
+package mysensorproject;
+
+import mysensorproject.Sensor;
+import mysensorproject.Drone;
+
+network SensorNetwork {
+    submodules:
+        sensor[5]: Sensor {
+            parameters:
+                @display("i=block/s");
+        }
+        drone: Drone {
+            parameters:
+                @display("i=block/uav");
+        }
+}

@@ -1,0 +1,17 @@
+14:09:35 **** Incremental Build of configuration debug for project WebotsBridgeProject ****
+make MODE=debug all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/WebotsBridgeProject/src'
+WebotsReceiver.cc
+In file included from WebotsReceiver.cc:2:
+D:/omnetpp-6.1/inet4.5/src/inet/applications/base/ApplicationBase.h:11:10: fatal error: 'inet/common/lifecycle/ModuleOperations.h' file not found
+#include "inet/common/lifecycle/ModuleOperations.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+make[1]: *** [Makefile:108: ../out/clang-debug/src/WebotsReceiver.o] Error 1
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/WebotsBridgeProject/src'
+make: *** [Makefile:2: all] Error 2
+"make MODE=debug all" terminated with exit code 2. Build might be incomplete.
+
+14:09:37 Build Failed. 3 errors, 0 warnings. (took 2s.588ms)
+

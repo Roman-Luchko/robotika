@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="TemplateBasedWizard">
+		<item key="nedfile.template" value="bundleentry://421.fwk1384177603/templates/nedfile/"/>
+		<item key="project.template" value="bundleentry://407.fwk1384177603/template/emptylargeproject/"/>
+		<item key="inifile.template" value="bundleentry://415.fwk1384177603/templates/inifile/"/>
+		<item key="simplemodule.template" value="bundleentry://421.fwk1384177603/templates/emptysimplemodule/"/>
+		<section name="NedFileWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="212"/>
+			<item key="DIALOG_Y_ORIGIN" value="418"/>
+			<item key="DIALOG_WIDTH" value="875"/>
+			<item key="DIALOG_HEIGHT" value="849"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		</section>
+		<section name="OmnetppCCProjectWizard.dialogBounds">
+		</section>
+		<section name="NewInifileWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="212"/>
+			<item key="DIALOG_Y_ORIGIN" value="316"/>
+			<item key="DIALOG_WIDTH" value="875"/>
+			<item key="DIALOG_HEIGHT" value="679"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		</section>
+		<section name="NewSimpleModuleWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="212"/>
+			<item key="DIALOG_Y_ORIGIN" value="316"/>
+			<item key="DIALOG_WIDTH" value="875"/>
+			<item key="DIALOG_HEIGHT" value="679"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		</section>
+	</section>
+</section>

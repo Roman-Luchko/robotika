@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;MySensorSim/src/Network.ned&apos; to &apos;SensorNetwork.ned&apos;" description="Rename resource &apos;Network.ned&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/Network.ned" name="SensorNetwork.ned" stamp="1747053485304" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;MySensorSim/src/SignalMsg.msg&apos; to &apos;SensorData.msg&apos;" description="Rename resource &apos;SignalMsg.msg&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/SignalMsg.msg" name="SensorData.msg" stamp="1747061220836" updateReferences="true"/>
+</session>

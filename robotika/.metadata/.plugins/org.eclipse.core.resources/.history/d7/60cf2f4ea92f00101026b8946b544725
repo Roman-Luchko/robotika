@@ -1,0 +1,23 @@
+#include "Sensor.h"
+#include "PositionLoader.h"
+
+Define_Module(Sensor);
+
+void Sensor::initialize()
+{
+    int index = getIndex();
+    pos = PositionLoader::getInstance()->getSensorPosition(index);
+    sendInterval = par("sendInterval");
+
+    scheduleAt(simTime() + sendInterval, new cMessage("sendData"));
+}
+
+void Sensor::handleMessage(cMessage *msg)
+{
+    if (strcmp(msg->getName(), "sendData") == 0) {
+        EV << "Sensor " << getIndex() << " sending data from position (" << pos.first << ", " << pos.second << ")\n";
+        cMessage* data = new cMessage("sensorData");
+        send(data, "out");
+        scheduleAt(simTime() + sendInterval, msg);
+    }
+}

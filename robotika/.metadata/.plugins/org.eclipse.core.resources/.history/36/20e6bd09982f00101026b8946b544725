@@ -1,0 +1,18 @@
+#include "Sensor.h"
+
+Define_Module(Sensor);
+
+void Sensor::initialize() {
+    id = par("id");
+    sendEvent = new cMessage("send");
+    scheduleAt(simTime() + uniform(0, 1), sendEvent);
+}
+
+void Sensor::handleMessage(cMessage *msg) {
+    if (msg == sendEvent) {
+        char payload[32];
+        sprintf(payload, "Data from sensor %d", id);
+        send(new cMessage(payload), "out");
+        scheduleAt(simTime() + uniform(1, 2), sendEvent);
+    }
+}

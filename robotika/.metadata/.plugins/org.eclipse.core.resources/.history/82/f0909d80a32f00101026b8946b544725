@@ -1,0 +1,9 @@
+package mysensorproject;
+
+simple Sensor
+{
+    parameters:
+    	double sendInterval = default(1);
+    gates:
+        output out;
+}

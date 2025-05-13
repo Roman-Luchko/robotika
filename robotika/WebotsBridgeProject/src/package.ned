@@ -1,0 +1,3 @@
+package webotsbridgeproject;
+
+@license(LGPL);

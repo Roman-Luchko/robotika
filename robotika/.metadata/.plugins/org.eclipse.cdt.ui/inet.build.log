@@ -1,0 +1,14 @@
+14:09:29 **** Incremental Build of configuration debug for project inet ****
+make MODE=debug -j20 all 
+make[1]: Entering directory '/d/omnetpp-6.1/inet4.5/src'
+*** CCACHE not detected - using precompiled headers
+*** COMPILING with:
+clang++ -c -std=c++17  -D__GXX_TYPEINFO_EQUALITY_INLINE=0 -O0 -Wall -glldb -fstandalone-debug   -MMD -MP -MF .d    -isystem /opt/mingw64/include -Wno-deprecated-register -Wno-unused-function -fno-omit-frame-pointer -DINET_EXPORT  -Wno-overloaded-virtual -include inet/common/precompiled_debug.h -DOMNETPPLIBS_IMPORT -DINET_EXPORT -I. -I/d/omnetpp-6.1/include
+*** LINKING with:
+clang++ -shared  -o ../out/clang-debug/src/libINET_dbg.dll  -Wl,--allow-multiple-definition -Wl,--whole-archive  -Wl,--no-whole-archive -loppenvir_dbg -loppsim_dbg -lstdc++    -fuse-ld=lld  -L/usr/bin -L/opt/mingw64/lib -L/d/omnetpp-6.1/lib -Wl,--out-implib,../out/clang-debug/src/libINET_dbg.dll.a -Wl,--output-def,../out/clang-debug/src/libINET_dbg.def -lws2_32 
+Building...
+make[1]: Nothing to be done for 'all-pch'.
+make[1]: Leaving directory '/d/omnetpp-6.1/inet4.5/src'
+
+14:09:35 Build Finished. 0 errors, 0 warnings. (took 5s.836ms)
+

@@ -1,0 +1,20 @@
+#ifndef SENSOR_H
+#define SENSOR_H
+
+#include <omnetpp.h>
+#include <utility>
+
+using namespace omnetpp;
+
+class Sensor : public cSimpleModule
+{
+  private:
+    std::pair<double, double> pos;
+    simtime_t sendInterval;
+
+  protected:
+    virtual void initialize() override;
+    virtual void handleMessage(cMessage *msg) override;
+};
+
+#endif

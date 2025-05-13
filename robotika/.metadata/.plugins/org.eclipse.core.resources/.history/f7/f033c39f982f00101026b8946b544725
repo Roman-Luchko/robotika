@@ -1,0 +1,7 @@
+simple Sensor
+{
+    parameters:
+        double sendInterval;
+    gates:
+        output out;
+}

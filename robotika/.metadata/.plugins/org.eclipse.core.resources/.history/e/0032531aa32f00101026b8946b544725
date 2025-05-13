@@ -1,0 +1,8 @@
+package mysensorproject;
+
+network SensorDroneNetwork
+{
+    submodules:
+        sensor[5]: Sensor;
+        drone: Drone;
+}

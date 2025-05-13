@@ -1,0 +1,9 @@
+package mysensorproject;
+
+simple Sensor
+{
+    parameters:
+        volatile double sendInterval = default(1s);
+    gates:
+        output out;
+}

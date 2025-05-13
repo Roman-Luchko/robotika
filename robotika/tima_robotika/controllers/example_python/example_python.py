@@ -3,20 +3,14 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from scipy.spatial.distance import cdist
 
+import numpy as np
+from scipy.spatial.distance import cdist
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
 class UAVPathPlanning:
     def __init__(self, area_size, uav_altitude, coverage_radius, dcc_position, uav_speed, 
                  hover_power, fly_power, battery_capacity):
-        """
-        Инициализация параметров системы
-        :param area_size: размер сенсорной области (в метрах) (width, height)
-        :param uav_altitude: высота полета UAV (в метрах)
-        :param coverage_radius: радиус покрытия UAV (в метрах)
-        :param dcc_position: позиция центра сбора данных (DCC) [x, y]
-        :param uav_speed: скорость UAV (м/с)
-        :param hover_power: мощность при зависании (Вт)
-        :param fly_power: мощность при полете (Вт)
-        :param battery_capacity: емкость батареи (мАч)
-        """
         self.area_size = area_size
         self.uav_altitude = uav_altitude
         self.coverage_radius = coverage_radius
@@ -25,186 +19,135 @@ class UAVPathPlanning:
         self.hover_power = hover_power
         self.fly_power = fly_power
         self.battery_capacity = battery_capacity
-        
+
     def find_hover_positions(self, sensor_positions):
-        """
-        Алгоритм 1: Поиск позиций зависания UAV на основе центроидов
-        :param sensor_positions: массив позиций сенсоров [[x1,y1], [x2,y2], ...]
-        :return: массив позиций зависания UAV
-        """
         uncovered_sensors = np.array(sensor_positions)
         hover_positions = []
-        
+
         while len(uncovered_sensors) > 0:
-            # Для каждого потенциального положения UAV (здесь упрощенно используем позиции сенсоров)
             max_covered = 0
             best_position = None
             best_covered_indices = []
-            
+
             for i, pos in enumerate(uncovered_sensors):
-                # Рассчитываем расстояние от текущей позиции до всех сенсоров
                 distances = cdist([pos], uncovered_sensors)[0]
                 covered_indices = np.where(distances <= self.coverage_radius)[0]
-                
+
                 if len(covered_indices) > max_covered:
                     max_covered = len(covered_indices)
                     best_position = pos
                     best_covered_indices = covered_indices
-            
+
             if best_position is None:
                 break
-                
-            # Рассчитываем центроид покрытых сенсоров
+
             covered_sensors = uncovered_sensors[best_covered_indices]
             centroid = np.mean(covered_sensors, axis=0)
-            
+
             hover_positions.append(centroid)
-            # Удаляем покрытые сенсоры
             uncovered_sensors = np.delete(uncovered_sensors, best_covered_indices, axis=0)
-        
+
         return np.array(hover_positions)
-    
+
     def cluster_hover_positions(self, hover_positions, num_uavs):
-        """
-        Алгоритм 2: Кластеризация зон сбора данных для нескольких UAV
-        :param hover_positions: массив позиций зависания
-        :param num_uavs: количество UAV
-        :return: центры кластеров и распределение позиций по кластерам
-        """
-        # Используем K-means для кластеризации
         kmeans = KMeans(n_clusters=num_uavs, random_state=0).fit(hover_positions)
         clusters = {}
-        
+
         for i, label in enumerate(kmeans.labels_):
             if label not in clusters:
                 clusters[label] = []
             clusters[label].append(hover_positions[i])
-        
-        # Возвращаем центры кластеров и распределение позиций
+
         return kmeans.cluster_centers_, clusters
-    
-    def plan_flight_path(self, cluster_positions, cluster_center):
-        """
-        Алгоритм 3: Планирование пути с избеганием возвратов
-        :param cluster_positions: позиции в кластере
-        :param cluster_center: центр кластера
-        :return: оптимальный путь для UAV
-        """
-        if len(cluster_positions) == 0:
-            return []
-            
-        # Начинаем с DCC
-        current_position = self.dcc_position
-        remaining_positions = np.array(cluster_positions)
-        path = [current_position]
-        
-        while len(remaining_positions) > 0:
-            # Находим ближайшую позицию
-            distances = cdist([current_position], remaining_positions)[0]
-            nearest_idx = np.argmin(distances)
-            nearest_position = remaining_positions[nearest_idx]
-            
-            # Добавляем в путь и удаляем из оставшихся
-            path.append(nearest_position)
-            current_position = nearest_position
-            remaining_positions = np.delete(remaining_positions, nearest_idx, axis=0)
-        
-        # Возвращаемся в DCC
-        path.append(self.dcc_position)
-        
-        return np.array(path)
-    
-    def calculate_energy_consumption(self, path, hover_time_per_position=10):
-        """
-        Расчет энергопотребления UAV на основе пути
-        :param path: массив точек пути
-        :param hover_time_per_position: время зависания на каждой позиции (сек)
-        :return: общее энергопотребление (в мАч)
-        """
-        if len(path) < 2:
-            return 0
-            
-        # Расчет расстояния полета
-        flight_distance = 0
-        for i in range(len(path)-1):
-            flight_distance += np.linalg.norm(path[i+1] - path[i])
-        
-        # Время полета (секунды)
-        flight_time = flight_distance / self.uav_speed
-        
-        # Время зависания (упрощенно - hover_time_per_position сек на каждую позицию кроме DCC)
-        hover_time = (len(path) - 2) * hover_time_per_position  # -2 потому что первый и последний - DCC
-        
-        # Энергопотребление (переводим ватты в мАч)
-        energy = (self.fly_power * flight_time + self.hover_power * hover_time) / 3.6
-        
-        return energy
-    
+
+    def plan_flight_paths(self, hover_positions, num_uavs):
+        # Для всех дронов одновременно
+        cluster_centers, clusters = self.cluster_hover_positions(hover_positions, num_uavs)
+        paths = []
+        for cluster_id in clusters:
+            cluster_positions = np.array(clusters[cluster_id])
+            current_position = self.dcc_position
+            path = [current_position]
+            remaining_positions = cluster_positions
+
+            while len(remaining_positions) > 0:
+                distances = cdist([current_position], remaining_positions)[0]
+                nearest_idx = np.argmin(distances)
+                nearest_position = remaining_positions[nearest_idx]
+
+                path.append(nearest_position)
+                current_position = nearest_position
+                remaining_positions = np.delete(remaining_positions, nearest_idx, axis=0)
+
+            path.append(self.dcc_position)  # Возвращаемся в DCC
+            paths.append(np.array(path))
+
+        return paths
+
+    def calculate_energy_consumption(self, paths, hover_time_per_position=10):
+        total_energy = 0
+        for path in paths:
+            flight_distance = 0
+            for i in range(len(path)-1):
+                flight_distance += np.linalg.norm(path[i+1] - path[i])
+
+            flight_time = flight_distance / self.uav_speed
+            hover_time = (len(path) - 2) * hover_time_per_position
+
+            energy = (self.fly_power * flight_time + self.hover_power * hover_time) / 3.6
+            total_energy += energy
+
+        return total_energy
+
     def optimize_uav_deployment(self, sensor_positions, max_uavs=5):
-        """
-        Оптимизация развертывания UAV для сбора данных
-        :param sensor_positions: позиции сенсоров
-        :param max_uavs: максимальное количество UAV для тестирования
-        :return: оптимальное количество UAV и соответствующие пути
-        """
-        # Шаг 1: Находим позиции зависания
         hover_positions = self.find_hover_positions(sensor_positions)
-        
-        # Пробуем разное количество UAV
-        for num_uavs in range(1, max_uavs+1):
-            # Шаг 2: Кластеризуем позиции
-            cluster_centers, clusters = self.cluster_hover_positions(hover_positions, num_uavs)
-            
-            # Шаг 3: Планируем пути для каждого UAV
-            paths = []
-            total_energy = 0
-            valid_deployment = True
-            
-            for cluster_id in clusters:
-                path = self.plan_flight_path(clusters[cluster_id], cluster_centers[cluster_id])
-                energy = self.calculate_energy_consumption(path)
-                
-                if energy > self.battery_capacity:
-                    valid_deployment = False
-                    break
-                
-                paths.append(path)
-                total_energy += energy
-            
-            if valid_deployment:
+        last_invalid_paths = []
+        last_invalid_hover_positions = hover_positions
+        last_invalid_uav_count = max_uavs
+
+        for num_uavs in range(1, max_uavs + 1):
+            paths = self.plan_flight_paths(hover_positions, num_uavs)
+            total_energy = self.calculate_energy_consumption(paths)
+
+            if total_energy <= self.battery_capacity:
                 print(f"Найдено валидное развертывание с {num_uavs} UAV")
                 print(f"Общее энергопотребление: {total_energy:.2f} мАч")
                 return num_uavs, paths, hover_positions
-        
-        print("Не удалось найти валидное развертывание с заданным количеством UAV")
-        return max_uavs, paths, hover_positions
-    
+            else:
+                last_invalid_paths = paths
+                last_invalid_hover_positions = hover_positions
+                last_invalid_uav_count = num_uavs
+
+        print("❌ Не удалось найти валидное развертывание с заданным количеством UAV")
+
+        return last_invalid_uav_count, last_invalid_paths, last_invalid_hover_positions
+
     def visualize_deployment(self, sensor_positions, hover_positions, paths):
-        """Визуализация развертывания UAV"""
         plt.figure(figsize=(10, 10))
-        
+
         # Отображаем сенсоры
         plt.scatter(sensor_positions[:, 0], sensor_positions[:, 1], c='blue', label='Сенсоры')
-        
+
         # Отображаем позиции зависания
         plt.scatter(hover_positions[:, 0], hover_positions[:, 1], c='red', marker='D', label='Позиции зависания')
-        
+
         # Отображаем DCC
         plt.scatter(self.dcc_position[0], self.dcc_position[1], c='green', marker='*', s=200, label='DCC')
-        
+
         # Отображаем пути UAV
         colors = ['purple', 'orange', 'brown', 'pink', 'gray']
         for i, path in enumerate(paths):
-            if len(path) > 0:
-                color = colors[i % len(colors)]
+            color = colors[i % len(colors)]
+            if path is not None and len(path) > 1:
                 plt.plot(path[:, 0], path[:, 1], '--', color=color, linewidth=2, label=f'UAV {i+1} путь')
-                plt.scatter(path[1:-1, 0], path[1:-1, 1], color=color, marker='o')
-        
+                if len(path) > 2:
+                    plt.scatter(path[1:-1, 0], path[1:-1, 1], color=color, marker='o')
+
         # Отображаем зоны покрытия
         for pos in hover_positions:
             circle = plt.Circle((pos[0], pos[1]), self.coverage_radius, color='gray', alpha=0.1)
             plt.gca().add_patch(circle)
-        
+
         plt.xlim(0, self.area_size[0])
         plt.ylim(0, self.area_size[1])
         plt.title('Развертывание UAV для сбора данных')
@@ -214,45 +157,20 @@ class UAVPathPlanning:
         plt.grid(True)
         plt.show()
 
-# Пример использования
-if __name__ == "__main__":
-    # Входные параметры системы
-    area_size = (2000, 2000)  # размер области (ширина, высота) в метрах
-    uav_altitude = 100        # высота полета UAV в метрах
-    coverage_radius = 200     # радиус покрытия UAV в метрах
-    dcc_position = [1000, 1000]  # позиция центра сбора данных (DCC)
-    
-    # Параметры UAV
-    uav_speed = 8             # скорость UAV в м/с
-    hover_power = 100         # мощность при зависании в Вт
-    fly_power = 200           # мощность при полете в Вт
-    battery_capacity = 5000   # емкость батареи в мАч
-    
-    # Генерация позиций сенсоров (можно заменить на реальные данные)
-    num_sensors = 100
-    sensor_positions = np.random.rand(num_sensors, 2) * np.array(area_size)
-    
-    # Создаем экземпляр планировщика
-    path_planner = UAVPathPlanning(
-        area_size=area_size,
-        uav_altitude=uav_altitude,
-        coverage_radius=coverage_radius,
-        dcc_position=dcc_position,
-        uav_speed=uav_speed,
-        hover_power=hover_power,
-        fly_power=fly_power,
-        battery_capacity=battery_capacity
-    )
-    
-    # Оптимизация развертывания UAV
-    max_uavs_to_test = 5
-    num_uavs, paths, hover_positions = path_planner.optimize_uav_deployment(
-        sensor_positions=sensor_positions,
-        max_uavs=max_uavs_to_test
-    )
-    
-    # Визуализация результатов
-    path_planner.visualize_deployment(sensor_positions, hover_positions, paths)
+# Пример использования:
+#area_size = (1000, 1000)
+#dcc_position = [500, 500]
+#uav_speed = 5  # м/с
+#hover_power = 10  # Вт
+#fly_power = 50  # Вт
+#battery_capacity = 10000  # мАч
+#coverage_radius = 100  # м
+
+#sensor_positions = np.random.rand(20, 2) * 1000  # случайные позиции сенсоров
+
+#uav_planner = UAVPathPlanning(area_size, 100, coverage_radius, dcc_position, uav_speed, hover_power, fly_power, battery_capacity)
+#num_uavs, paths, hover_positions = uav_planner.optimize_uav_deployment(sensor_positions, max_uavs=5)
+#uav_planner.visualize_deployment(sensor_positions, hover_positions, paths)
 
 
 
@@ -556,7 +474,17 @@ def get_gps_from_others(receiver):
             print("Ошибка разбора:", message, e)
     return gps_data
 
+import asyncio
+import websockets
 
+# Функция для отправки данных на сервер OMNeT++
+async def send_data_to_omnet(sensor_positions):
+    uri = "ws://localhost:8080"  # Адрес WebSocket-сервера OMNeT++
+    async with websockets.connect(uri) as websocket:
+        # Преобразуем данные в строку, например, JSON или строковый формат
+        data_to_send = str(sensor_positions)  # Преобразуем список координат в строку
+        await websocket.send(data_to_send)
+        print(f"Sent to OMNeT++: {data_to_send}")
 
 
 
@@ -609,45 +537,24 @@ sds = []
 
 
 # Глобальные параметры
-area_size = (2000, 2000)  # Размер области
-uav_altitude = 100        # Высота полета UAV
-coverage_radius = 200     # Радиус покрытия
-dcc_position = [1000, 1000]  # Позиция DCC
+area_size = (30, 30)  # Размер области
+uav_altitude = 2        # Высота полета UAV
+coverage_radius = 8     # Радиус покрытия
+dcc_position = [0, 0]  # Позиция DCC
 uav_speed = 8             # Скорость UAV
 hover_power = 100         # Мощность при зависании
 fly_power = 200           # Мощность при полете
 battery_capacity = 5000   # Емкость батареи
-max_uavs_to_test = 5      # Максимальное количество UAV для тестирования
+max_uavs_to_test = 1      # Максимальное количество UAV для тестирования
 sensor_positions = []
 
-# Функция поиска дороги (обновленная с глобальными переменными)
-def poisk_dorogi():
-    global area_size, uav_altitude, coverage_radius, dcc_position, uav_speed, hover_power, fly_power, battery_capacity, sensor_positions, max_uavs_to_test
-    
-    # Создаем экземпляр планировщика
-    path_planner = UAVPathPlanning(
-        area_size=area_size,
-        uav_altitude=uav_altitude,
-        coverage_radius=coverage_radius,
-        dcc_position=dcc_position,
-        uav_speed=uav_speed,
-        hover_power=hover_power,
-        fly_power=fly_power,
-        battery_capacity=battery_capacity
-    )
 
-    # Оптимизация развертывания UAV
-    num_uavs, paths, hover_positions = path_planner.optimize_uav_deployment(
-        sensor_positions=sensor_positions,
-        max_uavs=max_uavs_to_test
-    )
-
-    # Визуализация результатов
-    path_planner.visualize_deployment(sensor_positions, hover_positions, paths)
-    sensor_positions = []
 
 def main():
     global pravda
+    global sensor_positions
+    sensor_positions = []  # Явная инициализация
+
     robot, timestep = initialize_robot()
     devices = initialize_devices(robot, timestep)
     receiver, camera, front_left_led, front_right_led, imu, gps, compass, gyro, keyboard, camera_roll_motor, camera_pitch_motor, motors = devices
@@ -657,7 +564,6 @@ def main():
     print_controls()
 
     target_altitude = 1.0
-    global sensor_positions
 
     # Получаем GPS координаты от других роботов
     data = get_gps_from_others(receiver)
@@ -666,16 +572,49 @@ def main():
         for name, coords in data.items():
             try:
                 x, y, z = coords
-                sensor_positions.append([x, y])  # Используй [x, y, z] если твой planner требует 3D
+                sensor_positions.append([x, y])  # Использовать [x, y, z], если нужно 3D
             except Exception as e:
                 print(f"Ошибка при обработке данных '{name}': {e}")
     else:
         print("Я не нашел сенсоры")
-    print("sensor_positions",sensor_positions)
-    print("sensor_positions len",len(sensor_positions))
+
+    print("sensor_positions main", sensor_positions)
+    print("sensor_positions len main", len(sensor_positions))
+
+    print("Otpravka dat")
+    # Отправляем данные на OMNeT++
+    asyncio.get_event_loop().run_until_complete(send_data_to_omnet(sensor_positions))
+    print("Data otpravleno")
+    # Используем класс UAVPathPlanning для планирования развертывания
+    try:
+        uav_planner = UAVPathPlanning(
+            area_size=area_size,
+            uav_altitude=uav_altitude,
+            coverage_radius=coverage_radius,
+            dcc_position=dcc_position,
+            uav_speed=uav_speed,
+            hover_power=hover_power,
+            fly_power=fly_power,
+            battery_capacity=battery_capacity
+        )
+
+        num_uavs, paths, hover_positions = uav_planner.optimize_uav_deployment(sensor_positions, max_uavs=max_uavs_to_test)
+
+        uav_planner.visualize_deployment(
+            sensor_positions=np.array(sensor_positions),
+            hover_positions=np.array(hover_positions),
+            paths=[np.array(path) for path in paths]
+        )
+
+        pravda[10] = 1
+    except Exception as e:
+        print("Ошибка при вызове методов UAVPathPlanning:", e)
 
 
-    while robot.step(timestep) != -1:
+
+
+    
+    while robot.step(timestep) == -1:
         time = robot.getTime()
         roll, pitch, yaw = imu.getRollPitchYaw()
         x, y, altitude = gps.getValues()
@@ -747,17 +686,6 @@ def main():
             update_motors(motors, roll_input + roll_disturbance, pitch_input + pitch_disturbance,
                           vertical_input, yaw_disturbance)
 
-            if pravda[10] == 0:
-                try:
-                    if not sensor_positions:
-                        raise ValueError("sensor_positions пуст. Нет данных от e-puck'ов.")
-                    poisk_dorogi()
-                    pravda[10] = 1
-                except Exception as e:
-                    print("Ошибка при вызове poisk_dorogi():", e)
-
 if __name__ == "__main__":
     main()
 
-if __name__ == "__main__":
-    main()

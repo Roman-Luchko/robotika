@@ -1,0 +1,13 @@
+package mysensorproject;
+
+network SensorDroneNetwork
+{
+    submodules:
+        sensor[5]: Sensor;
+        drone: Drone;
+
+    connections allowunconnected:
+        for i=0..4 {
+            sensor[i].out --> drone.in[i];
+        }
+}

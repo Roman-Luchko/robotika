@@ -1,0 +1,12 @@
+#include "Drone.h"
+
+Define_Module(Drone);
+
+void Drone::initialize() {
+    EV << "Drone initialized\n";
+}
+
+void Drone::handleMessage(cMessage *msg) {
+    EV << "Drone received: " << msg->getName() << endl;
+    delete msg;
+}

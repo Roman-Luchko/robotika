@@ -1,0 +1,9 @@
+18:30:08 **** Incremental Build of configuration release for project MySensorSim ****
+make MODE=release all 
+cd src && /usr/bin/make
+make[1]: Entering directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorSim/src'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/d/Tuke_2024_2025_2_rok/Tuke_2_kurz_LS/robotika/MySensorSim/src'
+
+18:30:09 Build Finished. 0 errors, 0 warnings. (took 685ms)
+

@@ -1,0 +1,6 @@
+04:50:18 **** Incremental Build of configuration debug for project svaz ****
+"D:\\omnetpp-6.1\\tools\\win32.x86_64\\usr\\bin\\make.exe" MODE=debug all 
+Cannot run program "D:\omnetpp-6.1\tools\win32.x86_64\usr\bin\make.exe": Launching failed
+
+04:50:18 Build Finished. 0 errors, 0 warnings. (took 45ms)
+
